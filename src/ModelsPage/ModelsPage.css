@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none; /* Убирает подчеркивание */
+    color: inherit; /* Наследует цвет родительского элемента */
+    cursor: pointer; /* Если нужно, чтобы курсор был как у кнопки */
+  }
+  
+
+  .backButton {
+    margin-top: 40px;
+    margin-left: 20px;
+  }
+  
+  .ModelsPage {
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .genderSelectContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    margin-top: 20px;
+  }
+  
+  .genderSelect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+  
+     
+  
+    width: 200px;
+    height: 30px;
+    background: var(--tg-theme-secondary-bg-color);
+    border-radius: 50px;
+  }
+  
+  .genderText {
+    width: 100px;
+    height: 30px;
+    background: var(--tg-theme-secondary-bg-color);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .genderText.active {
+    background: var(--tg-theme-bg-color); ; /* Серый фон по умолчанию */
+    width: 90px;
+    height: 25px;
+  }
+  
+  .itemsList {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование по горизонтали */
+    justify-content: center; /* Центрирование по вертикали */
+    width: 100vw;
+  }
+  
+  .item {
+    width: 341px;
+    height: 540px;
+    background-color: var(--tg-theme-secondary-bg-color);
+    padding: 10px;
+    margin: 5px 0; /* Отступ между элементами */  
+    border-radius: 20px;
+  
+    display: flex;
+    flex-direction: column;
+  
+  }
+
+  
+  .modelAvatar {
+    height: 350px;  
+    border-radius: 20px;
+    
+    margin: 10px;
+  }
+
+  .imagesContainer {
+    display: flex;
+    flex-direction: row;
+
+    width: 200;
+
+    overflow-x: auto;
+    
+  }
+
+  .imagesContainer::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  .modelName { 
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 22px;
+    
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 30px;
+     
+  }
+  
+  .modelInfoText {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    margin-left: 20px;
+    color: var(--color-text-secondary);
+  
+    display: flex;
+  }
+  
+  .infoText {
+    width: 100px;
+    text-align: left;
+  }
+  
+  .modelInfo {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+  
+     
+    width: 100px;
+    text-align: left;
+  }
+  
+  .buttonPart {
+    display: flex;
+    align-items: end;
+
+  }
+  
+  .selectButton {
+    width: 130px;
+    height: 30px;
+  
+    margin-top: 20px;
+    margin-left: auto; /* Добавлено */
+  
+    background: var(--tg-theme-button-color);
+    border-radius: 20px;
+  
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: var(--tg-theme-button-text-color);
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

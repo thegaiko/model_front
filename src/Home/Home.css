@@ -1,0 +1,64 @@
+.Home {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.catGif {
+    margin-top: 10vh;
+    width: 250px;
+
+}
+
+.buttonsBar { 
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.headText { 
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    text-align: center;
+
+     
+}
+
+.text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+
+     
+}
+
+.homeBtn {
+    width: 250px;
+    height: 30px;
+
+    background: #417FC6;
+    border-radius: 20px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 10px;
+}

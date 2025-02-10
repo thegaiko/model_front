@@ -1,0 +1,211 @@
+.nameInput,
+.ageInput,
+.priceInput,
+.cityInput {
+    border: 0;
+    height: 20px;
+    align-items: end;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 19px;
+    text-align: left;
+
+    background-color: var(--tg-theme-secondary-bg-color);
+
+    width: 100px;
+    margin-left: 110px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.ageInput {
+    margin-left: 70px;
+    width: 100px;
+}
+
+.priceInput {
+    margin-left: 10px;
+    width: 100px;
+}
+
+.cityInput {
+    margin-left: 88px;
+    width: 100px;
+}
+
+
+.Add {
+    display: flex;
+    flex-direction: column; 
+
+}
+.headerText {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 19px;
+    text-align: left;
+    margin-left: 5vw;
+    margin-top: 5vh;
+}
+
+.inputLabel {
+    background-color: var(--tg-theme-secondary-bg-color);
+    border-radius: 20px;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    padding: 20px;
+}
+
+.inputLabelText {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    margin-left: 20px;
+    color: #ABABAB;
+}
+
+.inputTypeText {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 19px;
+}
+
+
+.genderAddContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 80vw;
+  }
+
+.genderAddSelect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    width: 180px;
+    height: 40px;
+    background: var(--tg-theme-bg-color);
+    border-radius: 5px;
+
+    margin-left: 105px;
+    }
+
+.genderAddText {
+    width: 120px;
+    height: 40px;
+    background: var(--tg-theme-bg-color); /* Серый фон по умолчанию */
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+
+.genderAddText.active {
+    width: 100px;
+    height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: var(--tg-theme-button-color);
+    }
+
+.line {
+    width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 0px;
+    border: 0.3px solid var(--color-borders);
+
+}
+
+.submitBtn {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 19px;
+     
+
+    border: 0;
+    color: #FFFFFF;
+    height: 50px;
+    width: 200px;
+    margin-left: 35vw;
+    background: var(--tg-theme-button-color);
+    border-radius: 20px;
+    margin-top: 10px;
+
+}
+
+.fileBtn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+     
+    width: 140px;
+    height: 15px;
+    color: var(--tg-theme-text-color);
+    background-color: var(--tg-theme-button-color); /* Синий цвет */
+    border: none;
+    border-radius: 8px; /* Закругленные углы */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 20px;
+  }
+
+input::file-selector-button {
+    display: none;
+}
+
+.modelName { 
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 22px;
+    
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 30px;
+     
+  }
+
+.myItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    border: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}

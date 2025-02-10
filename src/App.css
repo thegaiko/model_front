@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none; /* Убирает подчеркивание */
+  cursor: pointer; /* Если нужно, чтобы курсор был как у кнопки */
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
