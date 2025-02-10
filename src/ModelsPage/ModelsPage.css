@@ -78,7 +78,7 @@ body {
   
   .item {
     width: 341px;
-    height: 540px;
+    height: 560px;
     background-color: var(--tg-theme-secondary-bg-color);
     padding: 10px;
     margin: 5px 0; /* Отступ между элементами */  

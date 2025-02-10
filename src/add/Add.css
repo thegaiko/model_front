@@ -14,6 +14,7 @@
     text-align: left;
 
     background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-text-color);
 
     width: 100px;
     margin-left: 110px;
@@ -208,4 +209,23 @@ input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.delButton {
+    width: 130px;
+    height: 30px;
+    
+    margin-left: auto; /* Добавлено */
+    
+    background: var(--tg-theme-button-color);
+    border-radius: 20px;
+    
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    
+    color: var(--tg-theme-button-text-color);
+
 }

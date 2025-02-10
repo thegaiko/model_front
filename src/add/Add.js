@@ -232,7 +232,7 @@ function Add() {
                   <div className="modelInfo">{item.id}</div>
                 </div>
                 <div className="buttonPart">
-                  <button className="selectButton" onClick={() => deleteItem(item.id)}>УДАЛИТЬ</button>
+                  <button className="delButton" onClick={() => deleteItem(item.id)}>УДАЛИТЬ</button>
                 </div>
               </div>
             </div>
