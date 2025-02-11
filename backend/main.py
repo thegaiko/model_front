@@ -39,52 +39,66 @@ app.add_middleware(
 
 # Путь к JSON файлу, где хранятся данные
 FILE_PATH = "models.json"
+REQ_FILE_PATH = "request_models.json"
+
 
 # Папка для хранения загруженных файлов
 UPLOAD_FOLDER = "/var/www/html/photos"
 Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)  # Создаем папку, если она не существует
 
 # Функция для чтения данных из JSON файла
-def read_data():
-    if Path(FILE_PATH).exists():
-        with open(FILE_PATH, "r", encoding="utf-8") as file:
+def read_data(path):
+    if Path(path).exists():
+        with open(path, "r", encoding="utf-8") as file:
             return json.load(file)
     return []
 
 # Функция для записи данных в JSON файл
-def write_data(data):
-    with open(FILE_PATH, "w", encoding="utf-8") as file:
+def write_data(data, path):
+    with open(path, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
 
 # Маршрут GET для получения всех элементов
 @app.get("/api/items")
 def get_items():
-    res = read_data()
+    res = read_data(FILE_PATH)
     return res
 
 @app.post("/api/del_item")
 async def del_item(id: str = Form(...)):
-    res = read_data()
-    
-    # Находим элемент с данным id и удаляем его
-    updated_items = [item for item in res if item['id'] != id]
-    
-    # Если список изменился (т.е. элемент был найден и удален), сохраняем обновленные данные
-    if len(updated_items) < len(res):
-        write_data(updated_items)
-        return {"message": "Item deleted successfully"}
+    res = read_data(FILE_PATH)
+
+    # Находим элемент с данным id
+    item_to_delete = next((item for item in res if item['id'] == id), None)
+
+    if item_to_delete:
+        # Удаляем фотографии из other_photos
+        for photo_path in item_to_delete.get('other_photos', []):
+            try:
+                if os.path.exists(photo_path):
+                    os.remove(photo_path)
+            except Exception as e:
+                print(f"Error deleting file {photo_path}: {e}")
+
+        # Обновляем список, исключая удаленный элемент
+        updated_items = [item for item in res if item['id'] != id]
+
+        # Сохраняем обновленные данные
+        write_data(updated_items, FILE_PATH)
+
+        return {"message": "Item and associated photos deleted successfully"}
     else:
-        return {"error": "Item not found"}
+        return {"message": "Item not found"}
 
 # Маршрут POST для получения всех элементов пользователя
 @app.post("/api/my_items")
 async def get_user_items(user_id: str = Form(...)):
     my_items = []
-    res = read_data()
+    res = read_data(FILE_PATH)
     for item in res:
         if item['user_id'] == user_id:
             my_items.append(item)
-    
+
     return my_items
 
 # Маршрут POST для добавления нового элемента с файлами
@@ -142,9 +156,9 @@ async def add_item(
     print(new_item)
 
     # Читаем текущие данные, добавляем новый элемент и сохраняем
-    data = read_data()
+    data = read_data(REQ_FILE_PATH)
     data.append(new_item)
-    write_data(data)
+    write_data(data, REQ_FILE_PATH)
 
     return {"message": "Item added successfully", "id": item_id, "link": item_link}
 
@@ -159,4 +173,5 @@ async def get_file(filename: str):
 # Если файл запускается напрямую, то запускаем сервер с помощью uvicorn
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
 
