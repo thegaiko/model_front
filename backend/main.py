@@ -19,6 +19,11 @@ class Item(BaseModel):
     gender: str
     other_photos: List[str]
     link: str  # Поле для ссылки
+    about: str
+    height: str
+    parameters: str
+    leg: str
+    avatar: str
 
 # Инициализация FastAPI
 app = FastAPI()
@@ -93,6 +98,11 @@ async def add_item(
     city: str = Form(...),
     gender: str = Form(...),
     other_photos: List[UploadFile] = File([]),  # Дополнительные фотографии
+    about: str = Form(...),
+    height: str = Form(...),
+    parameters: str = Form(...),
+    leg: str = Form(...),
+    avatar: str = Form(...),
 ):
     # Сохраняем дополнительные фотографии
     other_photos_urls = []
@@ -121,6 +131,12 @@ async def add_item(
         "gender": gender,
         "other_photos": other_photos_urls,
         "link": item_link,
+        "about": about,
+        "height": height,
+        "parameters": parameters,
+        "leg": leg,
+        "avatar": avatar,
+
     }
 
     print(new_item)

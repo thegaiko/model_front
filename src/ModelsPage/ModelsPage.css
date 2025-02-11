@@ -1,299 +1,26 @@
+/* Общие стили */
 body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  a {
-    text-decoration: none; /* Убирает подчеркивание */
-    color: inherit; /* Наследует цвет родительского элемента */
-    cursor: pointer; /* Если нужно, чтобы курсор был как у кнопки */
-  }
-  
-
-  .backButton {
-    margin-top: 40px;
-    margin-left: 20px;
-  }
-  
-  .ModelsPage {
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .genderSelectContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    margin-top: 20px;
-  }
-  
-  .genderSelect {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 19px;
-    /* identical to box height */
-  
-     
-  
-    width: 200px;
-    height: 30px;
-    background: var(--tg-theme-secondary-bg-color);
-    border-radius: 50px;
-  }
-  
-  .genderText {
-    width: 100px;
-    height: 30px;
-    background: var(--tg-theme-secondary-bg-color);
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .genderText.active {
-    background: var(--tg-theme-bg-color); ; /* Серый фон по умолчанию */
-    width: 90px;
-    height: 25px;
-  }
-  
-  .itemsList {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Центрирование по горизонтали */
-    justify-content: center; /* Центрирование по вертикали */
-    width: 100vw;
-  }
-  
-  .item {
-    width: 341px;
-    height: 530px;
-    background-color: var(--tg-theme-secondary-bg-color);
-    padding: 10px;
-    padding-top: 10px;
-    margin: 5px 0; /* Отступ между элементами */  
-    border-radius: 20px;
-  
-    display: flex;
-    flex-direction: column;
-  
-  }
-
-  
-  .modelAvatar {
-    height: 350px;  
-    border-radius: 20px;
-    
-    margin: 10px;
-  }
-
-  .imagesContainer {
-    display: flex;
-    flex-direction: row;
-
-    width: 200;
-
-    overflow-x: auto;
-    
-  }
-
-  .imagesContainer::-webkit-scrollbar {
-    width: 0;
-  }
-  
-  .modelName { 
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 22px;
-    
-    margin-left: 20px;
-    margin-bottom: 10px;
-    width: 30px;
-     
-  }
-  
-  .modelInfoText {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-    margin-left: 20px;
-    color: var(--color-text-secondary);
-  
-    display: flex;
-  }
-  
-  .infoText {
-    width: 100px;
-    text-align: left;
-  }
-  
-  .modelInfo {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-  
-     
-    width: 100px;
-    text-align: left;
-  }
-  
-  .buttonPart {
-    display: flex;
-    align-items: end;
-
-  }
-  
-  .selectButton {
-    width: 130px;
-    height: 30px;
-  
-    margin-top: 20px;
-    margin-left: auto; /* Добавлено */
-  
-    background: var(--tg-theme-button-color);
-    border-radius: 20px;
-  
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-  
-    color: var(--tg-theme-button-text-color);
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .filtersContainer {
-    display: flex;
-    flex-direction: row;
-
-    width: 90vw;
-    overflow-y: auto;
-
-    padding-top: 10px;
-    padding-left: 5vw;
-    padding-right: 5vw;
-  }
-
-  .filterGroup {
-    display: flex;
-    flex-direction: row;
-    height: 45px;
-    background: var(--tg-theme-secondary-bg-color);
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    margin-bottom: 10px;
-  }
-
-  .filterInputGroup {
-    display: flex;
-    flex-direction: column;
-    height: 45px;
-    background: var(--tg-theme-secondary-bg-color);
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    margin-bottom: 10px;
-  }
-
-  .inputLine {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .filterLabel {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    color: #717173;
-
-    width: 80px;
-    margin-left: 3px;
-    text-align: left;
-  }
-
-
-select {
-  all: unset; /* Сбрасывает все стили */
-  display: inline-block; /* Устанавливает отображение как inline-block */
-  appearance: none; /* Убирает стрелку (внешний вид браузера) */
-  -webkit-appearance: none; /* Убирает внешний вид в WebKit-браузерах */
-  -moz-appearance: none; /* Убирает внешний вид в Firefox */
-  box-sizing: border-box; /* Для корректной работы с размерами */
-  background: var(--tg-theme-secondary-bg-color);
-  border: none; /* Убирает рамку */
-  padding: 0; /* Убирает внутренние отступы */
-  margin: 0; /* Убирает внешние отступы */
-  cursor: pointer; /* Устанавливает курсор указателя */
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
-  select:focus {
-    outline: none; /* Убирает стандартное обрамление при фокусе */
-  }
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
 
-  select,
-  input {
-    border: none;top: 43px;
+* {
+  box-sizing: border-box;
+}
 
-    width: 80px;
-    padding-left: 2px;
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 19px;
-    border: 0;
-    text-align: left;
-    color: var(--tg-theme-text-color);
-    background-color: var(--tg-theme-secondary-bg-color);
-  }
-
-  .selectBox {
-    display: flex;
-    flex-direction: column;
-  }
-
-.filterBtn {
-  width: 18px; /* ширина кнопки */
-  height: 18px; /* высота кнопки */
-  background-color: var(--tg-theme-text-color);
-  -webkit-mask-image: url('./filter.svg');
-  mask-image: url('./filter.svg');
-  mask-repeat: no-repeat;
-  mask-size: contain;
-
-  margin-top: 10px;
+.ModelsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
 }
 
 .loadingModelsGif {
@@ -302,7 +29,160 @@ select {
   margin-left: 25vw;
 }
 
+/* Стили для фильтров */
+.filtersContainer {
+  display: flex;
+  flex-direction: row;
 
+  width: 90vw;
+  overflow-y: auto;
+
+  padding-top: 10px;
+}
+
+.filterGroup,
+.filterInputGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 1vw;
+  background: var(--tg-theme-secondary-bg-color);
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.inputLine {
+  display: flex;
+  flex-direction: row;
+}
+
+.filterLabel {
+  font-weight: 600;
+  font-size: 12px;
+  color: #717173;
+  text-align: left;
+}
+
+.filterInput,
+.filterSecInput,
+input,
+select {
+  background: var(--tg-theme-secondary-bg-color);
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--tg-theme-text-color);
+  margin-top: 5px;
+  width: 90px;
+}
+
+.filterSecInput {
+  width: 50px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+select:focus,
+input:focus {
+  outline: none;
+}
+
+/* Стили для списка моделей */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.item {
+  background-color: var(--tg-theme-secondary-bg-color);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 20px;
+  width: 341px;
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagesContainer {
+  display: flex;
+  overflow-x: auto;
+}
+
+.modelAvatar {
+  height: 300px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.modelName {
+  font-weight: 700;
+  font-size: 28px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.modelInfoText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--color-text-secondary);
+  margin-left: 20px;
+}
+
+.nameBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  margin-top: 10px;
+}
+
+
+.modelInfoAvatar {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.infoText {
+  width: 100px;
+  text-align: left;
+}
+
+.modelInfo {
+  width: 100px;
+  text-align: left;
+}
+
+.buttonPart {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.selectButton {
+  background: var(--tg-theme-button-color);
+  border-radius: 20px;
+  color: var(--tg-theme-button-text-color);
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Модальное окно */
 .modal {
   position: fixed;
   top: 0;
@@ -348,4 +228,20 @@ select {
 
 .carouselBtn.next {
   right: 10px;
+}
+
+/* Убираем ненужные стили */
+input:focus,
+select:focus {
+  outline: none;
+}
+
+select::-webkit-scrollbar,
+input::-webkit-scrollbar {
+  display: none;
+}
+
+.aboutBox {
+  display: flex;
+  text-align: start;
 }

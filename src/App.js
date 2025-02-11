@@ -10,10 +10,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          {/* Маршрут для главной страницы */}
           <Route path="/" element={<Home />} />
-          
-          {/* Маршрут для страницы ModelsPage */}
           <Route path="/models" element={<ModelsPage />} />
           <Route path="/add" element={<Add />} />
         </Routes>
