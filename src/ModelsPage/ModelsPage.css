@@ -81,7 +81,7 @@ body {
     height: 530px;
     background-color: var(--tg-theme-secondary-bg-color);
     padding: 10px;
-    padding-top: 0px;
+    padding-top: 10px;
     margin: 5px 0; /* Отступ между элементами */  
     border-radius: 20px;
   
@@ -199,10 +199,25 @@ body {
 
   .filterGroup {
     display: flex;
+    flex-direction: row;
+    height: 45px;
+
+    background: var(--tg-theme-secondary-bg-color);
+    border-radius: 10px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+  }
+
+  .filterInputGroup {
+    display: flex;
     flex-direction: column;
     height: 45px;
 
-    background: #D9D9D9;
+    background: var(--tg-theme-secondary-bg-color);
     border-radius: 10px;
 
     padding-left: 5px;
@@ -230,18 +245,61 @@ body {
     text-align: left;
   }
 
+
+select {
+  all: unset; /* Сбрасывает все стили */
+  display: inline-block; /* Устанавливает отображение как inline-block */
+  appearance: none; /* Убирает стрелку (внешний вид браузера) */
+  -webkit-appearance: none; /* Убирает внешний вид в WebKit-браузерах */
+  -moz-appearance: none; /* Убирает внешний вид в Firefox */
+  box-sizing: border-box; /* Для корректной работы с размерами */
+  background: var(--tg-theme-secondary-bg-color);
+  border: none; /* Убирает рамку */
+  padding: 0; /* Убирает внутренние отступы */
+  margin: 0; /* Убирает внешние отступы */
+  cursor: pointer; /* Устанавливает курсор указателя */
+}
+
+  select:focus {
+    outline: none; /* Убирает стандартное обрамление при фокусе */
+  }
+
   select,
   input {
     border: none;top: 43px;
 
     width: 80px;
-
+    padding-left: 2px;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 19px;
-
-    color: #000000;
-    background-color: #D9D9D9;
+    border: 0;
+    text-align: left;
+    color: var(--tg-theme-text-color);
+    background-color: var(--tg-theme-secondary-bg-color);
   }
+
+  .selectBox {
+    display: flex;
+    flex-direction: column;
+  }
+
+.filterBtn {
+  width: 18px; /* ширина кнопки */
+  height: 18px; /* высота кнопки */
+  background-color: var(--tg-theme-text-color);
+  -webkit-mask-image: url('./filter.svg');
+  mask-image: url('./filter.svg');
+  mask-repeat: no-repeat;
+  mask-size: contain;
+
+  margin-top: 10px;
+}
+
+.loadingModelsGif {
+  margin-top: 40vh;
+  width: 150px;
+  margin-left: 25vw;
+}

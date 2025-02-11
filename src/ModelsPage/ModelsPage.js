@@ -1,7 +1,7 @@
 import axios from 'axios';
 import './ModelsPage.css';
 import { useState, useEffect } from 'react';
-import backBtn from '../back.svg';
+import loadingGif from '../loading.gif';
 
 function ModelsPage() {
   const [items, setItems] = useState([]);
@@ -12,6 +12,7 @@ function ModelsPage() {
     priceRange: ['', ''],
   });
   const [cities, setCities] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   var BackButton = window.Telegram.WebApp.BackButton;
   BackButton.show();
@@ -33,6 +34,9 @@ function ModelsPage() {
         })
         .catch(error => {
           console.error('Error fetching data:', error);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
   }, []);
 
@@ -57,40 +61,54 @@ function ModelsPage() {
     }
   };
 
+  if (isLoading) {
+    return (
+        <div className="ModelsPage">
+          <img className="loadingModelsGif" src={loadingGif} alt="Loading gif" />
+        </div>
+    );
+  }
+
   return (
       <div className="ModelsPage">
         <div className="filtersContainer">
           {/* Пол */}
           <div className="filterGroup">
-            <label className="filterLabel">Пол:</label>
-            <select
-                className="filterInput"
-                value={filters.gender}
-                onChange={(e) => handleFilterChange('gender', e.target.value)}
-            >
-              <option value="all">Все</option>
-              <option value="women">Женщины</option>
-              <option value="men">Мужчины</option>
-            </select>
+            <div className="selectBox">
+              <label className="filterLabel">Пол:</label>
+              <select
+                  className="filterInput"
+                  value={filters.gender}
+                  onChange={(e) => handleFilterChange('gender', e.target.value)}
+              >
+                <option value="all">Все</option>
+                <option value="women">Женщины</option>
+                <option value="men">Мужчины</option>
+              </select>
+            </div>
+            <div className="filterBtn"></div>
           </div>
 
           {/* Город */}
           <div className="filterGroup">
-            <label className="filterLabel">Город:</label>
-            <select
-                className="filterInput"
-                value={filters.city}
-                onChange={(e) => handleFilterChange('city', e.target.value)}
-            >
-              <option value="">Все</option>
-              {cities.map((city, index) => (
-                  <option key={index} value={city}>{city}</option>
-              ))}
-            </select>
+            <div className="selectBox">
+              <label className="filterLabel">Город:</label>
+              <select
+                  className="filterInput"
+                  value={filters.city}
+                  onChange={(e) => handleFilterChange('city', e.target.value)}
+              >
+                <option value="">Все</option>
+                {cities.map((city, index) => (
+                    <option key={index} value={city}>{city}</option>
+                ))}
+              </select>
+            </div>
+            <div className="filterBtn"></div>
           </div>
 
           {/* Возраст */}
-          <div className="filterGroup">
+          <div className="filterInputGroup">
             <label className="filterLabel">Возраст:</label>
             <div className="inputLine">
               <input
@@ -113,30 +131,30 @@ function ModelsPage() {
           </div>
 
           {/* Цена */}
-          <div className="filterGroup">
+          <div className="filterInputGroup">
             <label className="filterLabel">Цена (₽/час):</label>
             <div className="inputLine">
-                <input
-                    type="number"
-                    className="filterInput"
-                    placeholder="Мин."
-                    value={filters.priceRange[0]}
-                    onChange={(e) => handleFilterChange('priceRange', [e.target.value, filters.priceRange[1]])}
-                    min="0"
-                />
-                <input
-                    type="number"
-                    className="filterInput"
-                    placeholder="Макс."
-                    value={filters.priceRange[1]}
-                    onChange={(e) => handleFilterChange('priceRange', [filters.priceRange[0], e.target.value])}
-                    min="0"
-                />
-              </div>
+              <input
+                  type="number"
+                  className="filterInput"
+                  placeholder="Мин."
+                  value={filters.priceRange[0]}
+                  onChange={(e) => handleFilterChange('priceRange', [e.target.value, filters.priceRange[1]])}
+                  min="0"
+              />
+              <input
+                  type="number"
+                  className="filterInput"
+                  placeholder="Макс."
+                  value={filters.priceRange[1]}
+                  onChange={(e) => handleFilterChange('priceRange', [filters.priceRange[0], e.target.value])}
+                  min="0"
+              />
             </div>
           </div>
+        </div>
 
-          {/* Отображение элементов массива */}
+        {/* Отображение элементов массива */}
         <div className="itemsList">
           {filteredItems.map((item, index) => (
               <div key={index} className="item">
