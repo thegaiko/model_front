@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Add.css';
+import back from './back.svg';
 
 function Add() {
   const [name, setName] = useState('');
@@ -135,8 +136,8 @@ function Add() {
         <h1 className='headerText'>Создайте свою анкету</h1>
         <div className='inputLabel'>
           <form onSubmit={handleSubmit}>
-            <div>
-              <label className='inputTypeText'>Имя</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Имя</label></div>
               <input
                   className='nameInput'
                   type="text"
@@ -147,8 +148,8 @@ function Add() {
               />
             </div>
             <div className='line'></div>
-            <div>
-              <label className='inputTypeText'>Возраст</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Возраст</label></div>
               <input
                   className='ageInput'
                   placeholder='23'
@@ -159,8 +160,8 @@ function Add() {
               />
             </div>
             <div className='line'></div>
-            <div>
-              <label className='inputTypeText'>Прайс за 1 час</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Прайс за час</label></div>
               <input
                   className='priceInput'
                   placeholder='1000'
@@ -171,8 +172,8 @@ function Add() {
               />
             </div>
             <div className='line'></div>
-            <div>
-              <label className='inputTypeText'>Город</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Город</label></div>
               <input
                   className='cityInput'
                   placeholder='Москва'
@@ -183,7 +184,7 @@ function Add() {
               />
             </div>
             <div className='line'></div>
-            <div>
+            <div className='infoInputBoxAbout'>
               <label className='inputTypeText'>О себе</label>
               <textarea
                   className='aboutInput'
@@ -191,11 +192,12 @@ function Add() {
                   value={about}
                   onChange={(e) => setAbout(e.target.value)}
                   required
+                  maxlength="100"
               />
             </div>
             <div className='line'></div>
-            <div>
-              <label className='inputTypeText'>Рост</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Рост</label></div>
               <input
                   className='heightInput'
                   placeholder='170'
@@ -206,8 +208,8 @@ function Add() {
               />
             </div>
             <div className='line'></div>
-            <div>
-              <label className='inputTypeText'>Параметры</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Параметры</label></div>
               <input
                   className='parametersInput'
                   placeholder='90-60-90'
@@ -218,8 +220,8 @@ function Add() {
               />
             </div>
             <div className='line'></div>
-            <div>
-              <label className='inputTypeText'>Размер ноги</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Размеры ноги</label></div>
               <input
                   className='legInput'
                   placeholder='37'
@@ -230,32 +232,36 @@ function Add() {
               />
             </div>
             <div className='line'></div>
-            <div className="genderAddContainer">
-              <label className='inputTypeText'>Пол:</label>
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Пол</label></div>
               <div className="genderAddSelect">
-                <div
-                    className={`genderAddText ${selectedGender === 'women' ? 'active' : ''}`}
-                    onClick={() => setSelectedGender('women')}
+                <select
+                    className="genderSelect"
+                    value={selectedGender}
+                    onChange={(e) => setSelectedGender(e.target.value)}
                 >
-                  Женщина
-                </div>
-                <div
-                    className={`genderAddText ${selectedGender === 'men' ? 'active' : ''}`}
-                    onClick={() => setSelectedGender('men')}
-                >
-                  Мужчина
-                </div>
+                  <option value="women">Женщина</option>
+                  <option value="men">Мужчина</option>
+                </select>
               </div>
             </div>
             <div className='line'></div>
-            <div>
-              <label className='inputTypeText'>Фотографии:</label>
-              <input
-                  className='fileBtn'
-                  type="file"
-                  multiple
-                  onChange={handleOtherPhotosChange}
-              />
+            <div className='infoInputBox'>
+              <div className='inputTypeText'><label>Фотографии</label></div>
+
+              <div className="image-upload">
+                <label htmlFor="file-input">
+                  <div className="inputFileBox">
+                    <div className="fileUploadBtn"></div>
+                  </div>
+                </label>
+                <input
+                    id="file-input"
+                    type="file"
+                    multiple
+                    onChange={handleOtherPhotosChange}
+                />
+              </div>
             </div>
             <button className='submitBtn' type="submit">ОТПРАВИТЬ</button>
           </form>
@@ -263,7 +269,7 @@ function Add() {
         <h2 className='modelName'>Ваши анкеты:</h2>
         <div className='myItems'>
           <div>
-            {myItems.map((item, index) => (
+          {myItems.map((item, index) => (
                 <div key={index} className="item">
                   <div>
                     <div className="imagesContainer">

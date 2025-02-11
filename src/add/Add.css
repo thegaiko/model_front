@@ -1,7 +1,12 @@
 .nameInput,
 .ageInput,
 .priceInput,
-.cityInput {
+.cityInput,
+.aboutInput,
+.heightInput,
+.parametersInput,
+.legInput,
+.genderSelect{
     border: 0;
     height: 20px;
     align-items: end;
@@ -17,34 +22,25 @@
     color: var(--tg-theme-text-color);
 
     width: 100px;
-    margin-left: 110px;
 }
 
+.aboutInput {
+    margin-top: 5px;
+    width: 80vw;
+    height: 80px;
+}
 textarea:focus, input:focus{
     outline: none;
 }
 
-.ageInput {
-    margin-left: 70px;
-    width: 100px;
-}
-
-.priceInput {
-    margin-left: 10px;
-    width: 100px;
-}
-
-.cityInput {
-    margin-left: 88px;
-    width: 100px;
-}
 
 
 .Add {
     display: flex;
-    flex-direction: column; 
-
+    flex-direction: column;
 }
+
+
 .headerText {
     font-family: 'Open Sans';
     font-style: normal;
@@ -74,69 +70,31 @@ textarea:focus, input:focus{
     color: #ABABAB;
 }
 
+.infoInputBox {
+    display: flex;
+}
+
+.infoInputBoxAbout {
+    display: flex;
+    flex-direction: column;
+}
+
 .inputTypeText {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 19px;
+    width: 200px;
 }
 
-
-.genderAddContainer {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    width: 80vw;
-  }
-
-.genderAddSelect {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 19px;
-    /* identical to box height */
-
-
-    width: 180px;
-    height: 40px;
-    background: var(--tg-theme-bg-color);
-    border-radius: 5px;
-
-    margin-left: 105px;
-    }
-
-.genderAddText {
-    width: 120px;
-    height: 40px;
-    background: var(--tg-theme-bg-color); /* Серый фон по умолчанию */
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s;
-    }
-
-.genderAddText.active {
-    width: 100px;
-    height: 30px;
-    margin-left: 5px;
-    margin-right: 5px;
-    background: var(--tg-theme-button-color);
-    }
 
 .line {
     width: 300px;
     margin-top: 10px;
     margin-bottom: 10px;
     height: 0px;
-    border: 0.3px solid var(--color-borders);
+    border: 0px solid;
+    color: var(--color-borders);
 
 }
 
@@ -149,7 +107,7 @@ textarea:focus, input:focus{
      
 
     border: 0;
-    color: #FFFFFF;
+    color: var(--tg-theme-text-color);
     height: 50px;
     width: 200px;
     margin-left: 35vw;
@@ -160,21 +118,22 @@ textarea:focus, input:focus{
 }
 
 .fileBtn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-     
-    width: 140px;
-    height: 15px;
-    color: var(--tg-theme-text-color);
-    background-color: var(--tg-theme-button-color); /* Синий цвет */
+    color: white;
+    background-color: red; /* Синий цвет */
     border: none;
     border-radius: 8px; /* Закругленные углы */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-left: 20px;
+
+    padding: 5px;
+    padding-left: 15px;
+    width: 120px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 19px;
+    text-align: left;
   }
 
 input::file-selector-button {
@@ -228,4 +187,27 @@ input::-webkit-inner-spin-button {
     
     color: var(--tg-theme-button-text-color);
 
+}
+
+.image-upload>input {
+    display: none;
+}
+.inputFileBox {
+    background-color: var(--tg-theme-button-color);
+    padding: 10px;
+    border-radius: 20px;
+    width: 200px;
+    display: flex; /* Добавляем flexbox */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+}
+
+.fileUploadBtn {
+    width: 16px; /* ширина кнопки */
+    height: 16px; /* высота кнопки */
+    background-color: var(--tg-theme-button-text-color);;
+    -webkit-mask-image: url('back.svg');
+    mask-image: url('back.svg');
+    mask-repeat: no-repeat;
+    mask-size: contain;
 }
