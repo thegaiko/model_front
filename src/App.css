@@ -13,3 +13,13 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+/* Убирает скроллбар для всего документа */
+* {
+  -ms-overflow-style: none;  /* Для IE и Edge */
+  scrollbar-width: none;      /* Для Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none;  /* Для Chrome, Safari и других браузеров на базе WebKit */
+}

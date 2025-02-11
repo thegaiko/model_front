@@ -195,36 +195,34 @@ body {
     padding-right: 5vw;
   }
 
-  .filtersContainer::-webkit-scrollbar {width: 0}
-
   .filterGroup {
     display: flex;
     flex-direction: row;
     height: 45px;
-
     background: var(--tg-theme-secondary-bg-color);
     border-radius: 10px;
-
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 5px;
+    padding-bottom: 5px;
     margin-left: 1vw;
     margin-right: 1vw;
+    margin-bottom: 10px;
   }
 
   .filterInputGroup {
     display: flex;
     flex-direction: column;
     height: 45px;
-
     background: var(--tg-theme-secondary-bg-color);
     border-radius: 10px;
-
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 5px;
+    padding-bottom: 5px;
     margin-left: 1vw;
     margin-right: 1vw;
+    margin-bottom: 10px;
   }
 
   .inputLine {
@@ -302,4 +300,52 @@ select {
   margin-top: 40vh;
   width: 150px;
   margin-left: 25vw;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.modalImage {
+  width: 100%;
+  height: auto;
+}
+
+.carouselBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 10;
+}
+
+.carouselBtn.prev {
+  left: 10px;
+}
+
+.carouselBtn.next {
+  right: 10px;
 }

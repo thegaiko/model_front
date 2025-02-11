@@ -13,6 +13,9 @@ function ModelsPage() {
   });
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   var BackButton = window.Telegram.WebApp.BackButton;
   BackButton.show();
@@ -61,6 +64,29 @@ function ModelsPage() {
     }
   };
 
+  const openModal = (item) => {
+    setSelectedItem(item);
+    setCurrentImageIndex(0); // Начинаем с первого изображения
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
+  const goToNextImage = () => {
+    if (selectedItem && selectedItem.other_photos) {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % selectedItem.other_photos.length);
+    }
+  };
+
+  const goToPreviousImage = () => {
+    if (selectedItem && selectedItem.other_photos) {
+      setCurrentImageIndex((prevIndex) => (prevIndex - 1 + selectedItem.other_photos.length) % selectedItem.other_photos.length);
+    }
+  };
+
   if (isLoading) {
     return (
         <div className="ModelsPage">
@@ -86,7 +112,6 @@ function ModelsPage() {
                 <option value="men">Мужчины</option>
               </select>
             </div>
-            <div className="filterBtn"></div>
           </div>
 
           {/* Город */}
@@ -104,7 +129,6 @@ function ModelsPage() {
                 ))}
               </select>
             </div>
-            <div className="filterBtn"></div>
           </div>
 
           {/* Возраст */}
@@ -161,7 +185,13 @@ function ModelsPage() {
                 <div>
                   <div className="imagesContainer">
                     {item.other_photos.map((photo, photoIndex) => (
-                        <img key={photoIndex} src={photo} alt={`Photo ${photoIndex + 1}`} className="modelAvatar" />
+                        <img
+                            key={photoIndex}
+                            src={photo}
+                            alt={`Photo ${photoIndex + 1}`}
+                            className="modelAvatar"
+                            onClick={() => openModal(item)} // открытие модального окна
+                        />
                     ))}
                   </div>
                 </div>
@@ -188,6 +218,21 @@ function ModelsPage() {
               </div>
           ))}
         </div>
+
+        {/* Модальное окно с каруселью */}
+        {isModalOpen && selectedItem && (
+            <div className="modal" onClick={closeModal}>
+              <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+                <button className="carouselBtn prev" onClick={goToPreviousImage}>‹</button>
+                <img
+                    src={selectedItem.other_photos[currentImageIndex]}
+                    alt="Selected"
+                    className="modalImage"
+                />
+                <button className="carouselBtn next" onClick={goToNextImage}>›</button>
+              </div>
+            </div>
+        )}
       </div>
   );
 }
