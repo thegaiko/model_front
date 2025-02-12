@@ -20,7 +20,6 @@ a {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  text-align: center;
 }
 
 .loadingModelsGif {
@@ -44,7 +43,7 @@ a {
   flex-direction: column;
   background: var(--tg-theme-bg-color);
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 3px 10px;
   margin-right: 1vw;
   margin-top: 1vw;
 }
@@ -79,7 +78,6 @@ select {
 .filterSecInput {
   margin-top: 0px;
 }
-
 .filterSecInput {
   width: 50px;
 }
@@ -190,8 +188,9 @@ input:focus {
   border-radius: 20px;
 }
 
-.ant-btn-variant-solid {
-  background: var(--tg-theme-button-color);
+.ant-btn-variant-solid,
+.ant-btn-color-default {
+  background: var(--tg-theme-button-color) !important;
   color: var(--tg-theme-button-text-color);
 }
 

@@ -139,7 +139,17 @@ input::file-selector-button {
     display: none;
 }
 
-.modelName { 
+.myItemsHeadText {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 22px;
+
+    margin-bottom: 10px;
+}
+
+.modelName{
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
@@ -149,7 +159,6 @@ input::file-selector-button {
     margin-left: 20px;
     margin-bottom: 10px;
     width: 30px;
-     
   }
 
 .myItems {
@@ -216,8 +225,8 @@ input::-webkit-inner-spin-button {
     color: var(--tg-theme-text-color) !important; /* Устанавливаем красный цвет с приоритетом */
 }
 
-.ant-select-selector, .ant-input, .ant-input-number {
-    border-color: var(--tg-theme-text-color) !important;
+.ant-select-selector, .ant-input, .ant-input-number, .ant-btn-variant-outlined {
+    border: none !important;
     background: var(--tg-theme-bg-color) !important;
 }
 
@@ -237,4 +246,8 @@ input {
 
 .ant-upload-list-item{
     background: #FFFFFF !important;
+}
+
+.ant-form-item {
+    margin-bottom: 10px !important;
 }

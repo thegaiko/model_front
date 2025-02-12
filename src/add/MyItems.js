@@ -52,7 +52,7 @@ const MyItems = ({ userId }) => {
 
     return (
         <div>
-            <h2 className='modelName'>Ваши анкеты:</h2>
+            <h2 className='myItemsHeadText'>Ваши анкеты:</h2>
             <div className='myItems'>
                 <div>
                     {myItems.map((item, index) => (
@@ -77,25 +77,49 @@ const MyItems = ({ userId }) => {
                                 </div>
                             </div>
                             <div>
-                                <div className="modelName">{item.name}</div>
-                                <div className="modelInfoText">
-                                    <div className="infoText">Возраст </div>
-                                    <div className="modelInfo">{item.age} лет</div>
+                                <div className="nameBox">
+                                    <img className="modelInfoAvatar" src={item.avatar} alt="Avatar"/>
+                                    <div>
+                                        <div className="modelName">{item.name}</div>
+                                        <div className='modelInfoTextBox'>
+                                            <div className="modelAboutTextName"><strong>О себе:</strong></div>
+                                            <div className="modelAboutText">{item.about}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="modelInfoText">
-                                    <div className="infoText">Прайс </div>
-                                    <div className="modelInfo">{item.price} ₽/час</div>
-                                </div>
-                                <div className="modelInfoText">
-                                    <div className="infoText">Город </div>
-                                    <div className="modelInfo">{item.city}</div>
-                                </div>
-                                <div className="modelInfoText">
-                                    <div className="infoText">ID </div>
-                                    <div className="modelInfo">{item.id}</div>
+                                <div className="aboutBox">
+                                    <div>
+                                        <div className='modelInfoTextBox'>
+                                            <div className="modelInfoTextName"><strong>Возраст:</strong></div>
+                                            <div className="modelInfoText">{item.age} лет</div>
+                                        </div>
+                                        <div className='modelInfoTextBox'>
+                                            <div className="modelInfoTextName"><strong>Прайс:</strong></div>
+                                            <div className="modelInfoText">{item.price} (час)</div>
+                                        </div>
+                                        <div className='modelInfoTextBox'>
+                                            <div className="modelInfoTextName"><strong>Город:</strong></div>
+                                            <div className="modelInfoText">{item.city}</div>
+                                        </div>
+                                        <div className='modelInfoTextBox'>
+                                            <div className="modelInfoTextName"><strong>Параметры:</strong></div>
+                                            <div className="modelInfoText">{item.parameters}</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className='modelInfoTextBox'>
+                                            <div className="modelInfoTextName"><strong>Рост:</strong></div>
+                                            <div className="modelInfoText">{item.height}</div>
+                                        </div>
+                                        <div className='modelInfoTextBox'>
+                                            <div className="modelInfoTextName"><strong>Размер ноги:</strong></div>
+                                            <div className="modelInfoText">{item.leg}</div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="buttonPart">
-                                    <Button type="primary" htmlType="submit" onClick={() => deleteItem(item.id)}>УДАЛИТЬ</Button>
+                                    <Button type="primary" htmlType="submit"
+                                            onClick={() => deleteItem(item.id)}>УДАЛИТЬ</Button>
                                 </div>
                             </div>
                         </div>

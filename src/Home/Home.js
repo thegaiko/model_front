@@ -41,14 +41,6 @@ function Home() {
                 transition={{ duration: 0.8, delay: 0.3 }}
             />
             <motion.div
-                className="text"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-            >
-                partner for your photo shoots
-            </motion.div>
-            <motion.div
                 className='buttonsBar'
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSpring, animated } from 'react-spring'; // Для анимаций
 import {
   Button,
   Cascader,
@@ -10,7 +11,7 @@ import {
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import MyItems from './MyItems';
-import './Add.css'
+import './Add.css';
 
 const { Option } = Select;
 
@@ -24,10 +25,16 @@ const userId = tg?.initDataUnsafe?.user?.id || "-";
 const userName = tg?.initDataUnsafe?.user?.username || "-";
 const avatar = tg?.initDataUnsafe?.user?.photo_url || "-";
 
-
 const Add = () => {
   const [form] = Form.useForm();
   const [myItems, setMyItems] = useState([]);
+
+  // Анимация для контейнера формы
+  const formAnimation = useSpring({
+    from: { opacity: 0, transform: 'translateY(20px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    config: { tension: 200, friction: 15 },
+  });
 
   var BackButton = window.Telegram.WebApp.BackButton;
   BackButton.show();
@@ -124,17 +131,17 @@ const Add = () => {
   }, []);
 
   return (
-      <div style={{ padding: '20px' }}>
-        <h2 style={{ textAlign: 'center'}}>Заявка на публикацию анкеты</h2>
+      <animated.div style={{ ...formAnimation, padding: '20px' }}>
+        <h2 style={{ textAlign: 'center' }}>Заявка на публикацию анкеты</h2>
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item className="custom-label" label="Имя" name="name" rules={[{ required: true, message: 'Введите имя!' }]}>
-            <Input placeholder="Иван" maxLength={12}/>
+            <Input placeholder="Иван" maxLength={12} />
           </Form.Item>
           <Form.Item label="Возраст" name="age" rules={[{ required: true, message: 'Введите возраст!' }]}>
-            <InputNumber placeholder="23" style={{ width: '100%' }} maxLength={3}/>
+            <InputNumber placeholder="23" style={{ width: '100%' }} maxLength={3} />
           </Form.Item>
           <Form.Item label="Прайс за час" name="price" rules={[{ required: true, message: 'Введите цену!' }]}>
-            <InputNumber placeholder="1000" style={{ width: '100%' }} maxLength={5}/>
+            <InputNumber placeholder="1000" style={{ width: '100%' }} maxLength={5} />
           </Form.Item>
           <Form.Item label="Город" name="city" rules={[{ required: true, message: 'Выберите город!' }]}>
             <Select placeholder="Выберите город">
@@ -153,7 +160,7 @@ const Add = () => {
             <Input placeholder="90-60-90" maxLength={15} />
           </Form.Item>
           <Form.Item label="Размер ноги" name="leg" rules={[{ required: true, message: 'Введите размер ноги!' }]}>
-            <Input placeholder="37" maxLength={3}/>
+            <Input placeholder="37" maxLength={3} />
           </Form.Item>
           <Form.Item label="Пол" name="gender" rules={[{ required: true, message: 'Выберите пол!' }]}>
             <Select placeholder="Выберите пол">
@@ -171,7 +178,7 @@ const Add = () => {
           </Form.Item>
         </Form>
         <MyItems userId={userId} />
-      </div>
+      </animated.div>
   );
 };
 
