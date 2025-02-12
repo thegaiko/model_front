@@ -24,9 +24,8 @@ a {
 }
 
 .loadingModelsGif {
-  margin-top: 40vh;
-  width: 150px;
-  margin-left: 25vw;
+  height: 100px;
+  width: 100px;
 }
 
 /* Стили для фильтров */
@@ -34,20 +33,20 @@ a {
   display: flex;
   flex-direction: row;
 
-  width: 90vw;
+  width: 100vw;
   overflow-y: auto;
-
-  padding-top: 10px;
+  padding-left: 2vw;
 }
 
 .filterGroup,
 .filterInputGroup {
   display: flex;
   flex-direction: column;
-  margin: 10px 1vw;
-  background: var(--tg-theme-secondary-bg-color);
+  background: var(--tg-theme-bg-color);
   border-radius: 10px;
   padding: 5px 10px;
+  margin-right: 1vw;
+  margin-top: 1vw;
 }
 
 .inputLine {
@@ -60,13 +59,14 @@ a {
   font-size: 12px;
   color: #717173;
   text-align: left;
+  width: 90px;
 }
 
 .filterInput,
 .filterSecInput,
 input,
 select {
-  background: var(--tg-theme-secondary-bg-color);
+  background: var(--tg-theme-bg-color);
   border: none;
   font-weight: 600;
   font-size: 14px;
@@ -75,10 +75,18 @@ select {
   width: 90px;
 }
 
+.filterInput,
+.filterSecInput {
+  margin-top: 0px;
+}
+
 .filterSecInput {
   width: 50px;
 }
 
+.ant-image-mask {
+  border-radius: 20px;
+}
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -103,12 +111,11 @@ input:focus {
 }
 
 .item {
-  background-color: var(--tg-theme-secondary-bg-color);
+  background-color: var(--tg-theme-bg-color);
   padding: 10px;
   margin: 5px 0;
   border-radius: 20px;
-  width: 341px;
-  height: 580px;
+  width: 97vw;
   display: flex;
   flex-direction: column;
 }
@@ -131,22 +138,46 @@ input:focus {
   margin-bottom: 10px;
 }
 
-.modelInfoText {
+.modelInfoTextBox {
+  display: flex;
+}
+
+.modelInfoText,
+.modelInfoTextName,
+.modelAboutTextName,
+.modelAboutText {
   display: flex;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
   color: var(--color-text-secondary);
   margin-left: 20px;
+  width: 80px;
+}
+
+.modelInfoText {
+  width: 80px !important;
+}
+
+.modelAboutTextName {
+  width: 60px;
+}
+
+.modelAboutText {
+  width: 180px;
+  margin-left: 0;
+  text-align: left;
+  word-break: break-all;
 }
 
 .nameBox {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  width: 300px;
+  width: 350px;
   margin-top: 10px;
+  margin-left: 5vw;
+  margin-bottom: 10px;
 }
 
 
@@ -155,6 +186,18 @@ input:focus {
   border-radius: 50%;
 }
 
+.ant-btn  {
+  border-radius: 20px;
+}
+
+.ant-btn-variant-solid {
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
+
+.ant-btn-color-primary {
+  box-shadow: none;
+}
 .infoText {
   width: 100px;
   text-align: left;
@@ -169,6 +212,8 @@ input:focus {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  margin-right: 2vw;
+  margin-bottom: 1vh;
 }
 
 .selectButton {

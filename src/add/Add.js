@@ -1,27 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Add.css';
-import back from './back.svg';
+import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  Cascader,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Upload,
+} from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import MyItems from './MyItems';
+import './Add.css'
 
-function Add() {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [price, setPrice] = useState('');
-  const [city, setCity] = useState('');
-  const [about, setAbout] = useState('');
-  const [height, setHeight] = useState('');
-  const [parameters, setParameters] = useState('');
-  const [leg, setLeg] = useState('');
-  const [selectedGender, setSelectedGender] = useState('women');
-  const [otherPhotos, setOtherPhotos] = useState([]);
+const { Option } = Select;
+
+const cities = [
+  "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань", "Нижний Новгород", "Челябинск", "Самара", "Омск", "Ростов-на-Дону", "Уфа", "Красноярск", "Пермь", "Воронеж", "Волгоград", "Краснодар", "Саратов", "Тюмень", "Тольятти", "Ижевск", "Барнаул", "Ульяновск", "Иркутск", "Хабаровск", "Ярославль", "Владивосток", "Махачкала", "Томск", "Оренбург", "Кемерово", "Рязань", "Астрахань", "Набережные Челны", "Пенза", "Липецк", "Тула", "Киров", "Чебоксары", "Курск", "Калининград", "Улан-Удэ", "Ставрополь", "Магнитогорск", "Тверь", "Брянск", "Иваново", "Белгород", "Сочи", "Владимир", "Архангельск", "Сургут"
+];
+
+let tg = window.Telegram?.WebApp;
+
+const userId = tg?.initDataUnsafe?.user?.id || "-";
+const userName = tg?.initDataUnsafe?.user?.username || "-";
+const avatar = tg?.initDataUnsafe?.user?.photo_url || "-";
+
+
+const Add = () => {
+  const [form] = Form.useForm();
   const [myItems, setMyItems] = useState([]);
-
-  let tg = window.Telegram?.WebApp;
-
-  const userFirstName = tg?.initDataUnsafe?.user?.first_name || "Гость";
-  const userId = tg?.initDataUnsafe?.user?.id || "-";
-  const userName = tg?.initDataUnsafe?.user?.username || "-";
-  const avatar = tg?.initDataUnsafe?.user?.photo_url || "-";
 
   var BackButton = window.Telegram.WebApp.BackButton;
   BackButton.show();
@@ -29,61 +35,6 @@ function Add() {
     window.location.href = "/";
     BackButton.hide();
   });
-
-  const handleOtherPhotosChange = (e) => {
-    setOtherPhotos(Array.from(e.target.files));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('user_id', userId);
-    formData.append('item_link', userName);
-    formData.append('name', name);
-    formData.append('age', age);
-    formData.append('price', price);
-    formData.append('city', city);
-    formData.append('gender', selectedGender);
-    formData.append('about', about);
-    formData.append('height', height);
-    formData.append('parameters', parameters);
-    formData.append('leg', leg);
-    formData.append('avatar', avatar);
-
-    otherPhotos.forEach((photo) => {
-      formData.append('other_photos', photo);
-    });
-
-    try {
-      const response = await fetch('https://persiscan.ru/api/add_item', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert('Item added successfully!');
-        setName('');
-        setAge('');
-        setPrice('');
-        setCity('');
-        setSelectedGender('women');
-        setAbout('');
-        setHeight('');
-        setParameters('');
-        setLeg('');
-        setOtherPhotos([]);
-        fetchMyItems();
-      } else {
-        alert('Error: ' + data.message);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('There was an error submitting the form.');
-    }
-  };
 
   const fetchMyItems = async () => {
     try {
@@ -110,11 +61,10 @@ function Add() {
     try {
       const response = await fetch('https://persiscan.ru/api/del_item', {
         method: 'POST',
-        body: new URLSearchParams({ id: id }),
+        body: new URLSearchParams({ id }),
       });
 
       const data = await response.json();
-
       if (response.ok) {
         alert('Item deleted successfully!');
         setMyItems(myItems.filter(item => item.id !== id));
@@ -127,185 +77,102 @@ function Add() {
     }
   };
 
+  const handleSubmit = async (values) => {
+    const formData = new FormData();
+    formData.append('user_id', userId);
+    formData.append('item_link', userName);
+    formData.append('name', values.name);
+    formData.append('age', values.age);
+    formData.append('price', values.price);
+    formData.append('city', values.city);
+    formData.append('about', values.about);
+    formData.append('height', values.height);
+    formData.append('parameters', values.parameters);
+    formData.append('leg', values.leg);
+    formData.append('gender', values.gender);
+    formData.append('avatar', avatar);
+
+    if (values.photos && values.photos.fileList) {
+      values.photos.fileList.forEach(file => {
+        formData.append('other_photos', file.originFileObj);
+      });
+    }
+
+    try {
+      const response = await fetch('https://persiscan.ru/api/add_item', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Заявка на добавление анкеты отправлена, ожидайте рассмотрения!');
+        form.resetFields();
+        fetchMyItems();
+      } else {
+        alert('Error: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('There was an error submitting the form.');
+    }
+  };
+
   useEffect(() => {
     fetchMyItems();
   }, []);
 
   return (
-      <div className='Add'>
-        <h1 className='headerText'>Создайте свою анкету</h1>
-        <div className='inputLabel'>
-          <form onSubmit={handleSubmit}>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Имя</label></div>
-              <input
-                  className='nameInput'
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  placeholder='Иван'
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Возраст</label></div>
-              <input
-                  className='ageInput'
-                  placeholder='23'
-                  type="number"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  required
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Прайс за час</label></div>
-              <input
-                  className='priceInput'
-                  placeholder='1000'
-                  type="number"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                  required
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Город</label></div>
-              <input
-                  className='cityInput'
-                  placeholder='Москва'
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  required
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBoxAbout'>
-              <label className='inputTypeText'>О себе</label>
-              <textarea
-                  className='aboutInput'
-                  placeholder='Расскажите о себе'
-                  value={about}
-                  onChange={(e) => setAbout(e.target.value)}
-                  required
-                  maxlength="100"
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Рост</label></div>
-              <input
-                  className='heightInput'
-                  placeholder='170'
-                  type="number"
-                  value={height}
-                  onChange={(e) => setHeight(e.target.value)}
-                  required
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Параметры</label></div>
-              <input
-                  className='parametersInput'
-                  placeholder='90-60-90'
-                  type="text"
-                  value={parameters}
-                  onChange={(e) => setParameters(e.target.value)}
-                  required
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Размеры ноги</label></div>
-              <input
-                  className='legInput'
-                  placeholder='37'
-                  type="text"
-                  value={leg}
-                  onChange={(e) => setLeg(e.target.value)}
-                  required
-              />
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Пол</label></div>
-              <div className="genderAddSelect">
-                <select
-                    className="genderSelect"
-                    value={selectedGender}
-                    onChange={(e) => setSelectedGender(e.target.value)}
-                >
-                  <option value="women">Женщина</option>
-                  <option value="men">Мужчина</option>
-                </select>
-              </div>
-            </div>
-            <div className='line'></div>
-            <div className='infoInputBox'>
-              <div className='inputTypeText'><label>Фотографии</label></div>
-
-              <div className="image-upload">
-                <label htmlFor="file-input">
-                  <div className="inputFileBox">
-                    <div className="fileUploadBtn"></div>
-                  </div>
-                </label>
-                <input
-                    id="file-input"
-                    type="file"
-                    multiple
-                    onChange={handleOtherPhotosChange}
-                />
-              </div>
-            </div>
-            <button className='submitBtn' type="submit">ОТПРАВИТЬ</button>
-          </form>
-        </div>
-        <h2 className='modelName'>Ваши анкеты:</h2>
-        <div className='myItems'>
-          <div>
-          {myItems.map((item, index) => (
-                <div key={index} className="item">
-                  <div>
-                    <div className="imagesContainer">
-                      {item.other_photos.map((photo, photoIndex) => (
-                          <img key={photoIndex} src={photo} alt={`Photo ${photoIndex + 1}`} className="modelAvatar" />
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="modelName">{item.name}</div>
-                    <div className="modelInfoText">
-                      <div className="infoText">Возраст </div>
-                      <div className="modelInfo">{item.age} лет</div>
-                    </div>
-                    <div className="modelInfoText">
-                      <div className="infoText">Прайс </div>
-                      <div className="modelInfo">{item.price} ₽/час</div>
-                    </div>
-                    <div className="modelInfoText">
-                      <div className="infoText">Город </div>
-                      <div className="modelInfo">{item.city}</div>
-                    </div>
-                    <div className="modelInfoText">
-                      <div className="infoText">ID </div>
-                      <div className="modelInfo">{item.id}</div>
-                    </div>
-                    <div className="buttonPart">
-                      <button className="delButton" onClick={() => deleteItem(item.id)}>УДАЛИТЬ</button>
-                    </div>
-                  </div>
-                </div>
-            ))}
-          </div>
-        </div>
+      <div style={{ padding: '20px' }}>
+        <h2 style={{ textAlign: 'center'}}>Заявка на публикацию анкеты</h2>
+        <Form form={form} layout="vertical" onFinish={handleSubmit}>
+          <Form.Item className="custom-label" label="Имя" name="name" rules={[{ required: true, message: 'Введите имя!' }]}>
+            <Input placeholder="Иван" maxLength={12}/>
+          </Form.Item>
+          <Form.Item label="Возраст" name="age" rules={[{ required: true, message: 'Введите возраст!' }]}>
+            <InputNumber placeholder="23" style={{ width: '100%' }} maxLength={3}/>
+          </Form.Item>
+          <Form.Item label="Прайс за час" name="price" rules={[{ required: true, message: 'Введите цену!' }]}>
+            <InputNumber placeholder="1000" style={{ width: '100%' }} maxLength={5}/>
+          </Form.Item>
+          <Form.Item label="Город" name="city" rules={[{ required: true, message: 'Выберите город!' }]}>
+            <Select placeholder="Выберите город">
+              {cities.map((city, index) => (
+                  <Option key={index} value={city}>{city}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item label="О себе" name="about" rules={[{ required: true, message: 'Расскажите о себе!' }]}>
+            <Input.TextArea placeholder="Расскажите о себе" maxLength={50} />
+          </Form.Item>
+          <Form.Item label="Рост" name="height" rules={[{ required: true, message: 'Введите рост!' }]}>
+            <InputNumber placeholder="170" style={{ width: '100%' }} maxLength={3} />
+          </Form.Item>
+          <Form.Item label="Параметры" name="parameters" rules={[{ required: true, message: 'Введите параметры!' }]}>
+            <Input placeholder="90-60-90" maxLength={15} />
+          </Form.Item>
+          <Form.Item label="Размер ноги" name="leg" rules={[{ required: true, message: 'Введите размер ноги!' }]}>
+            <Input placeholder="37" maxLength={3}/>
+          </Form.Item>
+          <Form.Item label="Пол" name="gender" rules={[{ required: true, message: 'Выберите пол!' }]}>
+            <Select placeholder="Выберите пол">
+              <Option value="women">Женщина</Option>
+              <Option value="men">Мужчина</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="Фотографии" name="photos">
+            <Upload multiple beforeUpload={() => false} listType="picture">
+              <Button icon={<UploadOutlined />}>Загрузить фотографии</Button>
+            </Upload>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">Отправить</Button>
+          </Form.Item>
+        </Form>
+        <MyItems userId={userId} />
       </div>
   );
-}
+};
 
 export default Add;

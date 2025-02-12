@@ -49,7 +49,7 @@ async def send_request_to_channel(request):
     keyboard = InlineKeyboardMarkup()
     accept_button = InlineKeyboardButton(text="Accept", callback_data=f"accept_{request['id']}")
     deny_button = InlineKeyboardButton(text="Deny", callback_data=f"deny_{request['id']}")
-    
+
     keyboard.add(accept_button, deny_button)
 
     await bot.send_message(
@@ -88,16 +88,16 @@ async def send_welcome(message: types.Message):
     # Создаем кнопку для старта miniApp
     keyboard = types.InlineKeyboardMarkup()
     miniapp_button = types.InlineKeyboardButton(
-        text="Запустить Mini App", 
+        text="Запустить Mini App",
         url="https://t.me/rumodels_bot?startapp"  # Замените на ссылку вашего mini app
     )
-    
+
     # Добавляем кнопку на клавиатуру
     keyboard.add(miniapp_button)
-    
+
     # Отправляем сообщение с кнопкой
     await message.answer(
-        "Привет! Нажми на кнопку ниже, чтобы запустить приложение!", 
+        "Привет! Нажми на кнопку ниже, чтобы запустить приложение!",
         reply_markup=keyboard
     )
 

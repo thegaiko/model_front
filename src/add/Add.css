@@ -15,13 +15,12 @@
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 19px;
     text-align: left;
 
     background-color: var(--tg-theme-secondary-bg-color);
     color: var(--tg-theme-text-color);
 
-    width: 100px;
+    width: 180px;
 }
 
 .aboutInput {
@@ -210,4 +209,32 @@ input::-webkit-inner-spin-button {
     mask-image: url('back.svg');
     mask-repeat: no-repeat;
     mask-size: contain;
+}
+
+
+.ant-form-item .ant-form-item-label > label {
+    color: var(--tg-theme-text-color) !important; /* Устанавливаем красный цвет с приоритетом */
+}
+
+.ant-select-selector, .ant-input, .ant-input-number {
+    border-color: var(--tg-theme-text-color) !important;
+    background: var(--tg-theme-bg-color) !important;
+}
+
+.ant-input,
+.ant-input::placeholder,
+.ant-input-number-input,
+.ant-select-selector::placeholder,
+.ant-input-number-input::placeholder,
+.ant-select-selection-placeholder,
+.ant-select-selection-item {
+    color: var(--tg-theme-text-color) !important;
+}
+
+input {
+    background: var(--tg-theme-bg-color) !important;
+}
+
+.ant-upload-list-item{
+    background: #FFFFFF !important;
 }

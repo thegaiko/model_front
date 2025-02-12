@@ -160,7 +160,7 @@ async def add_item(
     data.append(new_item)
     write_data(data, REQ_FILE_PATH)
 
-    return {"message": "Item added successfully", "id": item_id, "link": item_link}
+    return {"message": "Заявка успешно отправлена! Ожидайте!", "id": item_id, "link": item_link}
 
 # Маршрут для получения файла
 @app.get("/uploads/{filename}")

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import loadingGif from '../loading.gif';
 import Filters from './Filters';
-import Modal from './Modal';
+import { Button, Image } from 'antd';
 import './ModelsPage.css';
 
 function ModelsPage() {
@@ -62,62 +63,99 @@ function ModelsPage() {
   const goToNextImage = () => setCurrentImageIndex((prevIndex) => (prevIndex + 1) % selectedItem.other_photos.length);
   const goToPreviousImage = () => setCurrentImageIndex((prevIndex) => (prevIndex - 1 + selectedItem.other_photos.length) % selectedItem.other_photos.length);
 
-  if (isLoading) return <div className="loadingModelsGif"><img src={loadingGif} alt="Loading" /></div>;
 
   return (
-      <div className="ModelsPage">
+      <motion.div
+          className="ModelsPage"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+      >
         <Filters filters={filters} onFilterChange={handleFilterChange} />
 
-        <div className="itemsList">
+        <motion.div
+            className="itemsList"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+        >
           {filteredItems.map((item, index) => (
-              <div key={index} className="item">
+              <motion.div
+                  key={index}
+                  className="item"
+                  initial={{opacity: 0, scale: 0.9}}
+                  animate={{opacity: 1, scale: 1}}
+                  transition={{duration: 0.3, delay: index * 0.1}}
+              >
                 <div className="imagesContainer">
-                  {item.other_photos.map((photo, photoIndex) => (
-                      <img
-                          key={photoIndex}
-                          src={photo}
-                          alt={`Photo ${photoIndex + 1}`}
-                          className="modelAvatar"
-                          onClick={() => openModal(item)}
-                      />
-                  ))}
+                  <Image.PreviewGroup
+                      preview={{
+                        onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
+                      }}
+                  >
+                    {item.other_photos.map((photo, photoIndex) => (
+                        <Image
+                            key={photoIndex}
+                            src={photo}
+                            alt={`Photo ${photoIndex + 1}`}
+                            className="modelAvatar"
+                            style={{height: '250px', width: 'auto'}}
+                            onClick={() => openModal(item)}
+                        />
+                    ))}
+                  </Image.PreviewGroup>
                 </div>
                 <div>
-                  <div className='nameBox'>
-                    <div className="modelName">{item.name}</div>
-                    <img className='modelInfoAvatar' src={item.avatar}/>
-                  </div>
-                  <div className='aboutBox'>
+                  <div className="nameBox">
+                    <img className="modelInfoAvatar" src={item.avatar} alt="Avatar"/>
                     <div>
-                      <div className="modelInfoText">Возраст: {item.age} лет</div>
-                      <div className="modelInfoText">Прайс: {item.price} ₽/час</div>
-                      <div className="modelInfoText">Город: {item.city}</div>
-                      <div className="modelInfoText">О себе: {item.about}</div>
+                      <div className="modelName">{item.name}</div>
+                      <div className='modelInfoTextBox'>
+                        <div className="modelAboutTextName"><strong>О себе:</strong></div>
+                        <div className="modelAboutText">{item.about}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="aboutBox">
+                  <div>
+                      <div className='modelInfoTextBox'>
+                        <div className="modelInfoTextName"><strong>Возраст:</strong></div>
+                        <div className="modelInfoText">{item.age} лет</div>
+                      </div>
+                      <div className='modelInfoTextBox'>
+                        <div className="modelInfoTextName"><strong>Прайс:</strong></div>
+                        <div className="modelInfoText">{item.price} (час)</div>
+                      </div>
+                      <div className='modelInfoTextBox'>
+                        <div className="modelInfoTextName"><strong>Город:</strong></div>
+                        <div className="modelInfoText">{item.city}</div>
+                      </div>
+                      <div className='modelInfoTextBox'>
+                        <div className="modelInfoTextName"><strong>Параметры:</strong></div>
+                        <div className="modelInfoText">{item.parameters}</div>
+                      </div>
                     </div>
                     <div>
-                      <div className="modelInfoText">Рост: {item.height} см</div>
-                      <div className="modelInfoText">Параметры: {item.parameters}</div>
-                      <div className="modelInfoText">Размер ноги: {item.leg}</div>
+                      <div className='modelInfoTextBox'>
+                        <div className="modelInfoTextName"><strong>Рост:</strong></div>
+                        <div className="modelInfoText">{item.height}</div>
+                      </div>
+                      <div className='modelInfoTextBox'>
+                        <div className="modelInfoTextName"><strong>Размер ноги:</strong></div>
+                        <div className="modelInfoText">{item.leg}</div>
+                      </div>
                     </div>
                   </div>
                   <div className="buttonPart">
-                    <a href={`https://t.me/${item.link}`} className="selectButton">НАПИСАТЬ</a>
+                    <Button type="primary" href={`https://t.me/${item.link}`}>
+                      НАПИСАТЬ
+                    </Button>
                   </div>
-                </div>
               </div>
-          ))}
-        </div>
-
-        {isModalOpen && selectedItem && (
-            <Modal
-                selectedItem={selectedItem}
-                currentImageIndex={currentImageIndex}
-                goToNextImage={goToNextImage}
-                goToPreviousImage={goToPreviousImage}
-                closeModal={closeModal}
-            />
-        )}
-      </div>
+            </motion.div>
+            ))}
+        </motion.div>
+      </motion.div>
   );
 }
 

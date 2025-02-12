@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const cities = [
     "Москва",
@@ -56,17 +57,32 @@ const cities = [
 
 const Filters = ({ filters, onFilterChange }) => {
     return (
-        <div className="filtersContainer">
-            <div className="filterGroup">
+        <motion.div
+            className="filtersContainer"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            <motion.div
+                className="filterGroup"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+            >
                 <label className="filterLabel">Пол:</label>
                 <select className="filterInput" value={filters.gender} onChange={(e) => onFilterChange('gender', e.target.value)}>
                     <option value="all">Все</option>
                     <option value="women">Женщины</option>
                     <option value="men">Мужчины</option>
                 </select>
-            </div>
+            </motion.div>
 
-            <div className="filterGroup">
+            <motion.div
+                className="filterGroup"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+            >
                 <label className="filterLabel">Город:</label>
                 <select className="filterInput" value={filters.city} onChange={(e) => onFilterChange('city', e.target.value)}>
                     <option value="">Все</option>
@@ -74,9 +90,14 @@ const Filters = ({ filters, onFilterChange }) => {
                         <option key={index} value={city}>{city}</option>
                     ))}
                 </select>
-            </div>
+            </motion.div>
 
-            <div className="filterInputGroup">
+            <motion.div
+                className="filterInputGroup"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+            >
                 <label className="filterLabel">Возраст:</label>
                 <div className="inputLine">
                     <input
@@ -96,10 +117,15 @@ const Filters = ({ filters, onFilterChange }) => {
                         min="0"
                     />
                 </div>
-            </div>
+            </motion.div>
 
-            <div className="filterInputGroup">
-                <label className="filterLabel">Цена (₽/час):</label>
+            <motion.div
+                className="filterInputGroup"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+            >
+                <label className="filterLabel">Цена (час):</label>
                 <div className="inputLine">
                     <input
                         type="number"
@@ -118,8 +144,8 @@ const Filters = ({ filters, onFilterChange }) => {
                         min="0"
                     />
                 </div>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 };
 
