@@ -225,7 +225,7 @@ input::-webkit-inner-spin-button {
     color: var(--tg-theme-text-color) !important; /* Устанавливаем красный цвет с приоритетом */
 }
 
-.ant-select-selector, .ant-input, .ant-input-number, .ant-btn-variant-outlined {
+.ant-select-selector, .ant-input, .ant-input-number {
     border: none !important;
     background: var(--tg-theme-bg-color) !important;
 }

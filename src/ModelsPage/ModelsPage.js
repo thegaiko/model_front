@@ -9,7 +9,7 @@ import './ModelsPage.css';
 function ModelsPage() {
   const [items, setItems] = useState([]);
   const [filters, setFilters] = useState({
-    gender: 'women',
+    gender: 'all',
     city: '',
     ageRange: ['', ''],
     priceRange: ['', ''],

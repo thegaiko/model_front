@@ -8,6 +8,35 @@ import loadingGif from '../loading.gif';
 function Home() {
     const [isLoading, setIsLoading] = useState(true);
 
+    // Получаем nickname из Telegram WebApp
+    const tg = window.Telegram?.WebApp;
+    const userName = tg?.initDataUnsafe?.user?.username || "-";
+
+    // Эффект для отправки запроса при открытии страницы
+    useEffect(() => {
+        const sendNickname = async () => {
+            try {
+                const response = await fetch("https://persiscan.ru/api/enter", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ nickname: userName }),
+                });
+
+                if (!response.ok) {
+                    console.error("Failed to send nickname", await response.text());
+                } else {
+                    console.log("Nickname sent successfully");
+                }
+            } catch (error) {
+                console.error("Error sending nickname", error);
+            }
+        };
+
+        sendNickname();
+    }, [userName]);
+
     // Эффект для симуляции загрузки
     useEffect(() => {
         const loadingTimer = setTimeout(() => {

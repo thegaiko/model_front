@@ -5,6 +5,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils import executor
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from aiogram.types import InputMediaPhoto, InlineKeyboardMarkup
 import asyncio
 
 API_TOKEN = '7824179408:AAERMD4AxyKMFKgj5ZWTSvSc235c2RdQuzI'  # Замените на ваш API токен бота
@@ -52,11 +53,32 @@ async def send_request_to_channel(request):
 
     keyboard.add(accept_button, deny_button)
 
-    await bot.send_message(
-        CHANNEL_ID,
-        f"Новый запрос:\nИмя: {request['name']}\nТелеграм: {request['link']}",
-        reply_markup=keyboard
+    message_text = (
+    f"Новый запрос:\n"
+    f"Имя: {request['name']}\n"
+    f"Возраст: {request['age']}\n"
+    f"Цена: {request['price']}\n"
+    f"Город: {request['city']}\n"
+    f"Пол: {request['gender']}\n"
+    f"Телеграм: @{request['link']}\n"
+    f"О себе: {request['about']}\n"
+    f"Рост: {request['height']}\n"
+    f"Параметры: {request['parameters']}\n"
+    f"Размер ноги: {request['leg']}"
     )
+
+    # Отправка текстового сообщения
+    await bot.send_message(CHANNEL_ID, message_text, reply_markup=keyboard)
+
+    try:
+        # Отправка изображений из other_photos
+        if 'other_photos' in request and request['other_photos']:
+            media_group = [InputMediaPhoto(photo_url) for photo_url in request['other_photos']]
+            await bot.send_media_group(CHANNEL_ID, media_group)
+    except:
+        if 'other_photos' in request and request['other_photos']:
+            for photo_url in request['other_photos']:
+                await bot.send_message(CHANNEL_ID, photo_url)
 
 # Хэндлер для нажатий на кнопки (Accept/Deny)
 @dp.callback_query_handler(lambda c: c.data and c.data.startswith(('accept_', 'deny_')))
@@ -88,18 +110,14 @@ async def send_welcome(message: types.Message):
     # Создаем кнопку для старта miniApp
     keyboard = types.InlineKeyboardMarkup()
     miniapp_button = types.InlineKeyboardButton(
-        text="Запустить Mini App",
+        text="ОТКРЫТЬ",
         url="https://t.me/rumodels_bot?startapp"  # Замените на ссылку вашего mini app
     )
 
     # Добавляем кнопку на клавиатуру
     keyboard.add(miniapp_button)
 
-    # Отправляем сообщение с кнопкой
-    await message.answer(
-        "Привет! Нажми на кнопку ниже, чтобы запустить приложение!",
-        reply_markup=keyboard
-    )
+    await message.answer_photo("https://imgur.com/a/6z5s06V", reply_markup=keyboard)
 
 # Настроим периодическую проверку каждые 10 секунд
 async def on_start():

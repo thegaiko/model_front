@@ -151,7 +151,7 @@ const Add = () => {
             </Select>
           </Form.Item>
           <Form.Item label="О себе" name="about" rules={[{ required: true, message: 'Расскажите о себе!' }]}>
-            <Input.TextArea placeholder="Расскажите о себе" maxLength={50} />
+            <Input.TextArea placeholder="Расскажите о себе" maxLength={80} />
           </Form.Item>
           <Form.Item label="Рост" name="height" rules={[{ required: true, message: 'Введите рост!' }]}>
             <InputNumber placeholder="170" style={{ width: '100%' }} maxLength={3} />

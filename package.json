@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@telegram-apps/analytics": "^1.3.13",
     "@telegram-apps/sdk": "^3.3.0",
     "@telegram-apps/sdk-react": "^3.0.7",
     "@testing-library/jest-dom": "^5.14.1",

@@ -25,6 +25,9 @@ class Item(BaseModel):
     leg: str
     avatar: str
 
+class NicknameRequest(BaseModel):
+    nickname: str
+
 # Инициализация FastAPI
 app = FastAPI()
 
@@ -40,6 +43,7 @@ app.add_middleware(
 # Путь к JSON файлу, где хранятся данные
 FILE_PATH = "models.json"
 REQ_FILE_PATH = "request_models.json"
+ENTER_LOGS_PATH = "enter_logs.json"
 
 
 # Папка для хранения загруженных файлов
@@ -169,6 +173,17 @@ async def get_file(filename: str):
     if Path(file_path).exists():
         return FileResponse(file_path)
     return {"error": "File not found"}
+
+@app.post("/api/enter")
+async def enter_user(data: NicknameRequest):
+    nickname = data.nickname
+    print(nickname)
+    # Читаем логи, добавляем nickname и сохраняем
+    logs = read_data(ENTER_LOGS_PATH)
+    logs.append({"nickname": nickname})
+    write_data(logs, ENTER_LOGS_PATH)
+    return {"message": "Логин успешно записан", "nickname": nickname}
+
 
 # Если файл запускается напрямую, то запускаем сервер с помощью uvicorn
 if __name__ == "__main__":
