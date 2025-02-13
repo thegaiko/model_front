@@ -6,6 +6,10 @@ import Filters from './Filters';
 import { Button, Image } from 'antd';
 import './ModelsPage.css';
 
+let tg = window.Telegram?.WebApp;
+
+const senderUsername = tg?.initDataUnsafe?.user?.username || "-";
+
 function ModelsPage() {
   const [items, setItems] = useState([]);
   const [filters, setFilters] = useState({
@@ -44,6 +48,18 @@ function ModelsPage() {
     }));
   };
 
+  const sendMessage = async (author) => {
+    try {
+      await axios.post('https://persiscan.ru/api/message', {
+        author: author,
+        sender: senderUsername
+      });
+      console.log(`Message sent: { author: ${author}, sender: ${senderUsername} }`);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  };
+
   const filteredItems = items.filter(item => {
     const matchesGender = filters.gender === 'all' || item.gender === filters.gender;
     const matchesCity = !filters.city || item.city === filters.city;
@@ -62,7 +78,6 @@ function ModelsPage() {
 
   const goToNextImage = () => setCurrentImageIndex((prevIndex) => (prevIndex + 1) % selectedItem.other_photos.length);
   const goToPreviousImage = () => setCurrentImageIndex((prevIndex) => (prevIndex - 1 + selectedItem.other_photos.length) % selectedItem.other_photos.length);
-
 
   return (
       <motion.div
@@ -147,7 +162,11 @@ function ModelsPage() {
                     </div>
                   </div>
                   <div className="buttonPart">
-                    <Button type="primary" href={`https://t.me/${item.link}`}>
+                    <Button
+                      type="primary"
+                      href={`https://t.me/${item.link}`}
+                      onClick={() => sendMessage(item.link)}
+                    >
                       НАПИСАТЬ
                     </Button>
                   </div>

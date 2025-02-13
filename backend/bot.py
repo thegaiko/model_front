@@ -111,7 +111,7 @@ async def send_welcome(message: types.Message):
     keyboard = types.InlineKeyboardMarkup()
     miniapp_button = types.InlineKeyboardButton(
         text="ОТКРЫТЬ",
-        url="https://t.me/rumodels_bot?startapp"  # Замените на ссылку вашего mini app
+        url="https://t.me/xashmodelsbot?startapp"  # Замените на ссылку вашего mini app
     )
 
     # Добавляем кнопку на клавиатуру
