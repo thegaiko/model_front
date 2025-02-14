@@ -32,9 +32,8 @@ a {
   display: flex;
   flex-direction: row;
 
-  width: 100vw;
+  width: 95vw;
   overflow-y: auto;
-  padding-left: 2vw;
 }
 
 .filterGroup,
@@ -149,7 +148,7 @@ input:focus {
   font-size: 14px;
   line-height: 19px;
   color: var(--color-text-secondary);
-  margin-left: 20px;
+  margin-left: 10px;
   width: 80px;
 }
 

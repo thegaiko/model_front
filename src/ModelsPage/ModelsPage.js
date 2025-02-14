@@ -122,7 +122,7 @@ function ModelsPage() {
                 </div>
                 <div>
                   <div className="nameBox">
-                    <img className="modelInfoAvatar" src={item.avatar} alt="Avatar"/>
+                    <a onClick={() => sendMessage(item.link)} href={`https://t.me/${item.link}`}><img className="modelInfoAvatar" src={item.avatar} alt="Avatar"/></a>
                     <div>
                       <div className="modelName">{item.name}</div>
                       <div className='modelInfoTextBox'>
